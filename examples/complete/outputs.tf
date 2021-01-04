@@ -1,14 +1,9 @@
-output "id" {
-  description = "ID of the created example"
-  value       = module.example.id
+output "json_map_objects" {
+  description = "The mobius3 container definitions"
+  value       = module.mobius3.json_map_objects
 }
 
-output "example" {
-  description = "Output \"example\" from example module"
-  value       = module.example.example
-}
-
-output "random" {
-  description = "Output \"random\" from example module"
-  value       = module.example.random
+output "container_depends_on" {
+  description = "The mobius3 container dependency"
+  value       = module.mobius3.container_depends_on
 }

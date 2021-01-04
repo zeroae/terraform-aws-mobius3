@@ -5,7 +5,7 @@
 #
 
 # Name of this project
-name: terraform-example-module
+name: terraform-aws-mobius3
 
 # Logo for this project
 #logo: docs/logo.png
@@ -15,50 +15,46 @@ license: "APACHE2"
 
 # Copyrights
 copyrights:
-  - name: "Cloud Posse, LLC"
-    url: "https://cloudposse.com"
+  - name: "Zero A.E., LLC"
+    url: "https://zero-ae.com"
     year: "2020"
 
 # Canonical GitHub repo
-github_repo: cloudposse/terraform-example-module
+github_repo: zeroae/terraform-aws-mobius3
 
 # Badges to display
 badges:
   - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse/terraform-example-module.svg"
-    url: "https://github.com/cloudposse/terraform-example-module/releases/latest"
-  - name: "Slack Community"
-    image: "https://slack.cloudposse.com/badge.svg"
-    url: "https://slack.cloudposse.com"
-  - name: "Discourse Forum"
-    image: "https://img.shields.io/discourse/https/ask.sweetops.com/posts.svg"
-    url: "https://ask.sweetops.com/"
+    image: "https://img.shields.io/github/release/zeroae/terraform-aws-mobius3.svg"
+    url: "https://github.com/zeroae/terraform-aws-mobius3/releases/latest"
 
 # List any related terraform modules that this module may be used with or that this module depends on.
 related:
+  - name: "terraform-aws-ecs-container-definition"
+    description: "Terraform module to generate well-formed JSON documents (container definitions) that are passed to the aws_ecs_task_definition Terraform resource."
+    url: "https://github.com/cloudposse/terraform-aws-ecs-container-definition.git"
   - name: "terraform-null-label"
     description: "Terraform module designed to generate consistent names and tags for resources. Use terraform-null-label to implement a strict naming convention."
     url: "https://github.com/cloudposse/terraform-null-label"
 
 # List any resources helpful for someone to get started. For example, link to the hashicorp documentation or AWS documentation.
 references:
+  - name: "mobius3"
+    description: "Continuously and asynchronously sync a local folder to an S3 bucket."
+    url: "https://github.com/uktrade/mobius3"
   - name: "Terraform Standard Module Structure"
     description: "HashiCorp's standard module structure is a file and directory layout we recommend for reusable modules distributed in separate repositories."
     url: "https://www.terraform.io/docs/modules/index.html#standard-module-structure"
   - name: "Terraform Module Requirements"
     description: "HashiCorp's guidance on all the requirements for publishing a module. Meeting the requirements for publishing a module is extremely easy."
     url: "https://www.terraform.io/docs/registry/modules/publish.html#requirements"
-  - name: "Terraform `random_integer` Resource"
-    description: "The resource random_integer generates random values from a given range, described by the min and max attributes of a given resource."
-    url: "https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/integer"
   - name: "Terraform Version Pinning"
     description: "The required_version setting can be used to constrain which versions of the Terraform CLI can be used with your configuration"
     url: "https://www.terraform.io/docs/configuration/terraform.html#specifying-a-required-terraform-version"
 
 # Short description of this project
 description: |-
-  This is `terraform-example-module` project provides all the scaffolding for a typical well-built Cloud Posse module. It's a template repository you can
-  use when creating new repositories.
+  The `terraform-aws-mobius3` module creates the a container definition that syncs an ECS task volumes to S3.
 
 # Introduction to the project
 #introduction: |-
@@ -70,8 +66,11 @@ usage: |-
 
   ```hcl
   module "example" {
-    source = "https://github.com/cloudposse/terraform-example-module.git?ref=master"
-    example = "Hello world!"
+    source = "https://github.com/zeroae/terraform-aws-mobius3.git?ref=master"
+
+    bucket_id = "example-bucket-name"
+    bucket_region = "us-east-1"
+    bucket_key_prefix = "rootfs/"
   }
   ```
 
@@ -91,5 +90,5 @@ include:
 
 # Contributors to this project
 contributors:
-  - name: "Erik Osterman"
-    github: "osterman"
+  - name: "Patrick Sodré"
+    github: "sodre"
