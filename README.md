@@ -131,7 +131,7 @@ No provider.
 | bucket\_key\_prefix | The key prefix to use for the bucket objects. | `any` | n/a | yes |
 | bucket\_region | Bucket Region | `any` | n/a | yes |
 | log\_configuration | Log configuration options to send to a custom log driver for the container. For more details, see https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LogConfiguration.html | `any` | `null` | no |
-| mobius3\_image | The Mobius3 Image for S3<->FS synchronization | `string` | `"quay.io/uktrade/mobius3:v0.0.32"` | no |
+| mobius3\_image | The Mobius3 Image for S3<->FS synchronization | `string` | `"ghcr.io/zeroae/terraform-aws-mobius3:0.0.34"` | no |
 | user | The user that owns the volume. Can be any of these formats: uid, uid:gid. The default is (0:0). | `string` | `"0:0"` | no |
 | volume\_name | The volume name. | `string` | `"data"` | no |
 
