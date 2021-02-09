@@ -29,7 +29,7 @@ variable "awscli_image" {
 variable "mobius3_image" {
   description = "The Mobius3 Image for S3<->FS synchronization"
   type        = string
-  default     = "quay.io/uktrade/mobius3:v0.0.32"
+  default     = "ghcr.io/zeroae/terraform-aws-mobius3:0.0.34"
 }
 
 # https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LogConfiguration.html
