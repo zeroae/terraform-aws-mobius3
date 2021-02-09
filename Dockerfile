@@ -1,4 +1,5 @@
 FROM python:3.8-alpine
+LABEL org.opencontainers.image.source=https://github.com/zeroae/terraform-aws-mobius3
 
 RUN addgroup -S mobius3 && \
     adduser -S mobius3 -G mobius3 && \
