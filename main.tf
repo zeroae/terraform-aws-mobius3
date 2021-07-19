@@ -3,14 +3,14 @@ locals {
 }
 
 module "volume_label" {
-  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.19.2"
+  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
   name        = var.volume_name
   delimiter   = "_"
   label_order = ["name"]
 }
 
 module "copy_from_s3" {
-  source          = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=tags/0.41.0"
+  source          = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=tags/0.57.0"
   container_name  = "copy_from_s3"
   container_image = var.awscli_image
   essential       = false
@@ -33,6 +33,7 @@ module "copy_from_s3" {
     {
       containerPath = "/srv/data"
       sourceVolume  = module.volume_label.id
+      readOnly      = false
     }
   ]
 
@@ -42,7 +43,7 @@ module "copy_from_s3" {
 # TODO: Implement a health check
 # TODO: Support multiple volumes
 module "mobius3" {
-  source          = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=tags/0.41.0"
+  source          = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=tags/0.57.0"
   container_name  = "mobius3"
   container_image = var.mobius3_image
   essential       = true
@@ -71,6 +72,7 @@ module "mobius3" {
     {
       containerPath = "/srv/data"
       sourceVolume  = module.volume_label.id
+      readOnly      = false
     }
   ]
 
