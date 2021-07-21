@@ -9,37 +9,6 @@ module "volume_label" {
   label_order = ["name"]
 }
 
-module "copy_from_s3" {
-  source          = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=tags/0.57.0"
-  container_name  = "copy_from_s3"
-  container_image = var.awscli_image
-  essential       = false
-
-  user = var.user
-
-  entrypoint = [
-    "/bin/sh"
-  ]
-  command = [
-    "-c",
-    join(";", [
-      "set -e",
-      "aws s3 sync s3://${var.bucket_id}/${local.key_prefix}/${module.volume_label.id}/ /srv/data",
-      "chown -R ${var.user} /srv/data",
-    ])
-  ]
-
-  mount_points = [
-    {
-      containerPath = "/srv/data"
-      sourceVolume  = module.volume_label.id
-      readOnly      = false
-    }
-  ]
-
-  log_configuration = var.log_configuration
-}
-
 # TODO: Implement a health check
 # TODO: Support multiple volumes
 module "mobius3" {
@@ -47,13 +16,6 @@ module "mobius3" {
   container_name  = "mobius3"
   container_image = var.mobius3_image
   essential       = true
-
-  container_depends_on = [
-    {
-      containerName = module.copy_from_s3.json_map_object["name"]
-      condition     = "SUCCESS"
-    },
-  ]
 
   user = var.user
 

@@ -20,12 +20,6 @@ variable "user" {
   default     = "0:0"
 }
 
-variable "awscli_image" {
-  description = "The AWSCLI Compatible Image"
-  type        = string
-  default     = "docker.io/amazon/aws-cli:2.0.52"
-}
-
 variable "mobius3_image" {
   description = "The Mobius3 Image for S3<->FS synchronization"
   type        = string
