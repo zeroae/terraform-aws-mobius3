@@ -13,7 +13,6 @@ output "container_depends_on_list" {
 
 output "json_map_objects" {
   value = [
-    module.copy_from_s3.json_map_object,
     module.mobius3.json_map_object
   ]
 }
