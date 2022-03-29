@@ -4,7 +4,7 @@
 # Order is important: the last matching pattern has the highest precedence
 
 # These owners will be the default owners for everything
-*             @zeroae/engineering @zeroe/contributors
+*             @zeroae/engineering
 
 # Cloud Posse must review any changes to Makefiles
 **/Makefile   @zeroae/engineering
@@ -15,10 +15,10 @@
 
 # Cloud Posse must review any changes to standard context definition,
 # but some changes can be rubber-stamped.
-**/*.tf       @zeroae/engineering @zeroae/contributors @zeroae/approvers
-README.yaml   @zeroae/engineering @zeroae/contributors @zeroae/approvers
-README.md     @zeroae/engineering @zeroae/contributors @zeroae/approvers
-docs/*.md     @zeroae/engineering @zeroae/contributors @zeroae/approvers
+**/*.tf       @zeroae/engineering @zeroae/approvers
+README.yaml   @zeroae/engineering @zeroae/approvers
+README.md     @zeroae/engineering @zeroae/approvers
+docs/*.md     @zeroae/engineering @zeroae/approvers
 
 # Cloud Posse Admins must review all changes to CODEOWNERS or the mergify configuration
 .github/mergify.yml @zeroae/admins
