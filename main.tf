@@ -1,5 +1,8 @@
 locals {
-  key_prefix = trimsuffix(var.bucket_key_prefix, "/")
+  key_prefix = join("/", compact([
+    trimprefix(trimsuffix(var.bucket_key_prefix, "/"), "/"),
+    module.volume_label.id
+  ]))
 }
 
 module "volume_label" {
@@ -10,10 +13,10 @@ module "volume_label" {
 }
 
 # TODO: Implement a health check
-# TODO: Support multiple volumes
+# TODO: Support different user/groups
 module "mobius3" {
   source          = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=tags/0.57.0"
-  container_name  = "mobius3"
+  container_name  = "mobius3-${var.volume_name}"
   container_image = var.mobius3_image
   essential       = true
 
@@ -25,7 +28,7 @@ module "mobius3" {
     var.bucket_id,
     "https://{}.s3.${var.bucket_region}.amazonaws.com/",
     var.bucket_region,
-    "--prefix", "${local.key_prefix}/${module.volume_label.id}/",
+    "--prefix", "${local.key_prefix}/",
     "--credentials-source", "ecs-container-endpoint",
     "--log-level", "INFO"
   ]
