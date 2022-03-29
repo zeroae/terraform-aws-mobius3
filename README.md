@@ -271,7 +271,7 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 
 ## Copyrights
 
-Copyright © 2020-2021 [Zero A.E., LLC](https://zero-ae.com)
+Copyright © 2020-2022 [Zero A.E., LLC](https://zero-ae.com)
 
 
 
