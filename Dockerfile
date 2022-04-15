@@ -8,6 +8,7 @@ RUN addgroup -S mobius3 && \
 WORKDIR /home/mobius3
 
 RUN pip install mobius3==0.0.34
+COPY zmobius3.py /usr/bin/zmobius3
 
 USER mobius3
 

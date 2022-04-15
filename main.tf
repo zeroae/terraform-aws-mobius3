@@ -12,7 +12,6 @@ module "volume_label" {
   label_order = ["name"]
 }
 
-# TODO: Implement a health check
 # TODO: Support different user/groups
 module "mobius3" {
   source          = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=tags/0.57.0"
@@ -23,7 +22,7 @@ module "mobius3" {
   user = var.user
 
   command = [
-    "mobius3",
+    "zmobius3",
     "/srv/data",
     var.bucket_id,
     "https://{}.s3.${var.bucket_region}.amazonaws.com/",
@@ -33,13 +32,21 @@ module "mobius3" {
     "--log-level", "INFO"
   ]
 
-  mount_points = [
-    {
-      containerPath = "/srv/data"
-      sourceVolume  = module.volume_label.id
-      readOnly      = false
-    }
-  ]
+  healthcheck = {
+    command = ["/bin/sh", "-c",
+      "cat /tmp/ruok | grep imok"
+    ]
+    retries     = 3
+    timeout     = 3
+    interval    = 10
+    startPeriod = 60
+  }
+
+  mount_points = [{
+    containerPath = "/srv/data"
+    sourceVolume  = module.volume_label.id
+    readOnly      = false
+  }]
 
   log_configuration = var.log_configuration
 }
@@ -47,7 +54,6 @@ module "mobius3" {
 locals {
   output_container_depends_on = {
     containerName = module.mobius3.json_map_object["name"]
-    # TODO: Use HEALTHY once we have a healthcheck
-    condition = "START"
+    condition     = "HEALTHY"
   }
 }
